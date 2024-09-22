@@ -22,8 +22,8 @@ export function pinyinToZhuyin(input: string): string[][] {
         continue;
       }
       
-      // Check for special cases first (yi, ying, yun, yu, shi, zhi, chi, ri, zi, ci, si)
-      const specialCases = ['yi', 'ying', 'yun', 'yu', 'shi', 'zhi', 'chi', 'ri', 'zi', 'ci', 'si'];
+      // Check for special cases first (ying, yun, yu, shi, zhi, chi, ri, zi, ci, si, yi)
+      const specialCases = ['ying', 'yun', 'yu', 'shi', 'zhi', 'chi', 'ri', 'zi', 'ci', 'si', 'yi'];
       const matchedSpecialCase = specialCases.find(sc => pinyinSyllable.substr(i).toLowerCase().startsWith(sc));
       if (matchedSpecialCase) {
         zhuyin += pinyinToZhuyinMap[matchedSpecialCase];
