@@ -25,6 +25,11 @@ function pinyinToZhuyin(text: string): string[][] {
         syllable = syllable.replace('u', 'ü');
       }
       
+      // Special case for 'yi', 'wu', 'yu'
+      if (['yi', 'wu', 'yu'].includes(syllable)) {
+        syllable = syllable.slice(-1);
+      }
+      
       // Convert to Zhuyin
       for (let i = 0; i < syllable.length; i++) {
         const chunk = syllable.slice(i);
