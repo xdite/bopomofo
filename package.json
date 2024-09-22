@@ -9,10 +9,16 @@
     "prepublishOnly": "npm run build",
     "test": "jest"
   },
-  "keywords": ["pinyin", "zhuyin", "bopomofo", "chinese"],
+  "keywords": [
+    "pinyin",
+    "zhuyin",
+    "bopomofo",
+    "chinese"
+  ],
   "author": "Your Name",
   "license": "MIT",
   "dependencies": {
+    "@types/pinyin": "^2.10.2",
     "pinyin": "^4.0.0-alpha.2"
   },
   "devDependencies": {

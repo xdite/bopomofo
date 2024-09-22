@@ -1,4 +1,4 @@
-import pinyinToZhuyin from './index';
+import { pinyinToZhuyin } from './index';
 
 const testCases: [string, string[][]][] = [
   ['中心', [['ㄓㄨㄥˉ'], ['ㄒㄧㄣˉ']]],

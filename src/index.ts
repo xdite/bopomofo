@@ -1,58 +1,60 @@
-import pinyin from 'pinyin';
 import { pinyinToZhuyinMap } from './pinyinToZhuyinMap';
+import pinyin from 'pinyin';
 
-function pinyinToZhuyin(text: string): string[][] {
-  const pinyinResult = pinyin(text, { style: pinyin.STYLE_TONE2 });
-  console.log('Pinyin result:', pinyinResult);
+export function pinyinToZhuyin(input: string): string[][] {
+  // Convert the input to pinyin
+  const pinyinArray = pinyin(input, { style: pinyin.STYLE_TONE2 });
   
-  return pinyinResult.map((syllables: string[]) => 
-    syllables.map((syllable: string) => {
-      console.log('Processing syllable:', syllable);
-      let zhuyin = '';
-      let tone = '';
+  // Convert pinyin to Zhuyin
+  return pinyinArray.map((pinyinOptions: string[]) => {
+    const pinyinSyllable = pinyinOptions[0]; // Take the first pinyin option
+    let zhuyin = '';
+    let i = 0;
+    let tone = '';
+    
+    while (i < pinyinSyllable.length) {
+      const char = pinyinSyllable[i].toLowerCase();
       
-      // Extract tone
-      if (syllable.match(/[1-4]$/)) {
-        tone = syllable.slice(-1);
-        syllable = syllable.slice(0, -1);
+      // Check for tone number
+      if (char >= '0' && char <= '5') {
+        tone = char;
+        i++;
+        continue;
       }
       
-      // Handle 'v' as 'ü' and special case for 'yu'
-      syllable = syllable.replace(/v/g, 'ü');
-      if (syllable === 'yu') {
-        syllable = 'ü';
-      } else if (['j', 'q', 'x', 'y'].includes(syllable[0]) && syllable.includes('u')) {
-        syllable = syllable.replace('u', 'ü');
-      }
-      
-      // Special case for 'yi', 'wu', 'yu', 'shi', 'zhi', 'chi', 'ri'
-      if (['yi', 'wu', 'yu'].includes(syllable)) {
-        syllable = syllable.slice(-1);
-      } else if (['shi', 'zhi', 'chi', 'ri'].includes(syllable)) {
-        syllable = syllable.slice(0, -1);
-      }
-      
-      // Convert to Zhuyin
-      for (let i = 0; i < syllable.length; i++) {
-        const chunk = syllable.slice(i);
-        for (let j = chunk.length; j > 0; j--) {
-          const subChunk = chunk.slice(0, j);
-          if (pinyinToZhuyinMap[subChunk]) {
-            zhuyin += pinyinToZhuyinMap[subChunk];
-            i += j - 1;
-            break;
-          }
+      // Check for three-letter compounds first
+      if (i < pinyinSyllable.length - 2) {
+        const threeLetters = pinyinSyllable.substr(i, 3).toLowerCase();
+        if (pinyinToZhuyinMap[threeLetters]) {
+          zhuyin += pinyinToZhuyinMap[threeLetters];
+          i += 3;
+          continue;
         }
       }
-      
-      // Add tone mark
-      if (tone) {
-        zhuyin += ['', 'ˉ', 'ˊ', 'ˇ', 'ˋ'][parseInt(tone)];
+      // Check for two-letter compounds
+      if (i < pinyinSyllable.length - 1) {
+        const twoLetters = pinyinSyllable.substr(i, 2).toLowerCase();
+        if (pinyinToZhuyinMap[twoLetters]) {
+          zhuyin += pinyinToZhuyinMap[twoLetters];
+          i += 2;
+          continue;
+        }
       }
-      
-      return zhuyin;
-    })
-  );
+      // If no compound found, check for single letter
+      zhuyin += pinyinToZhuyinMap[char] || char;
+      i++;
+    }
+    
+    // Add tone symbol
+    if (tone) {
+      zhuyin += getToneSymbol(tone);
+    }
+    
+    return [zhuyin];
+  });
 }
 
-export default pinyinToZhuyin;
+function getToneSymbol(tone: string): string {
+  const toneSymbols = ['', 'ˊ', 'ˇ', 'ˋ', '˙'];
+  return toneSymbols[parseInt(tone) - 1] || '';
+}
