@@ -23,7 +23,18 @@ export function pinyinToZhuyin(input: string): string[][] {
       }
       
       // Check for special cases first
-      const specialCases = ['xiong', 'jing', 'jin', 'ying', 'ing', 'yun', 'yu', 'shi', 'zhi', 'chi', 'ri', 'zi', 'ci', 'si', 'yi', 'wu', 'yin', 'in', 'ang', 'eng', 'ong'];
+      // 注意：特殊情况的处理顺序非常重要，以确保正确转换
+      // 1. 首先处理最长的特殊组合（如 'xiong'），以避免被错误地拆分
+      // 2. 然后处理可能引起歧义的组合（如 'jin' 和 'jing'），确保 'jing' 在 'jin' 之前
+      // 3. 接着处理其他常见的特殊组合
+      // 4. 最后处理单个韵母，如 'i', 'u' 等
+      // 这个顺序确保了像 "銀行"(yin2 hang2)、"音響"(yin1 xiang3) 和 "環境"(huan2 jing4) 这样的词能被正确处理
+      const specialCases = [
+        'xiong', 'jing', 'ying', 'yun', 'jin', 'yin',
+        'ang', 'eng', 'ing', 'ong',
+        'yu', 'shi', 'zhi', 'chi', 'ri', 'zi', 'ci', 'si',
+        'yi', 'wu', 'in'
+      ];
       const matchedSpecialCase = specialCases.find(sc => pinyinSyllable.substr(i).toLowerCase().startsWith(sc));
       if (matchedSpecialCase) {
         zhuyin += pinyinToZhuyinMap[matchedSpecialCase];
