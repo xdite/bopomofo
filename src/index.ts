@@ -23,7 +23,7 @@ export function pinyinToZhuyin(input: string): string[][] {
       }
       
       // Check for special cases first
-      const specialCases = ['xiong', 'ying', 'yun', 'yu', 'shi', 'zhi', 'chi', 'ri', 'zi', 'ci', 'si', 'yi', 'wu', 'yin', 'in', 'jing', 'jin'];
+      const specialCases = ['xiong', 'jing', 'jin', 'ying', 'ing', 'yun', 'yu', 'shi', 'zhi', 'chi', 'ri', 'zi', 'ci', 'si', 'yi', 'wu', 'yin', 'in', 'ang', 'eng', 'ong'];
       const matchedSpecialCase = specialCases.find(sc => pinyinSyllable.substr(i).toLowerCase().startsWith(sc));
       if (matchedSpecialCase) {
         zhuyin += pinyinToZhuyinMap[matchedSpecialCase];
@@ -31,15 +31,6 @@ export function pinyinToZhuyin(input: string): string[][] {
         continue;
       }
       
-      // Check for three-letter compounds
-      if (i < pinyinSyllable.length - 2) {
-        const threeLetters = pinyinSyllable.substr(i, 3).toLowerCase();
-        if (pinyinToZhuyinMap[threeLetters]) {
-          zhuyin += pinyinToZhuyinMap[threeLetters];
-          i += 3;
-          continue;
-        }
-      }
       // Check for two-letter compounds
       if (i < pinyinSyllable.length - 1) {
         const twoLetters = pinyinSyllable.substr(i, 2).toLowerCase();
