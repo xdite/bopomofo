@@ -22,10 +22,12 @@ export function pinyinToZhuyin(input: string): string[][] {
         continue;
       }
       
-      // Check for 'yu' first
-      if (i < pinyinSyllable.length - 1 && pinyinSyllable.substr(i, 2).toLowerCase() === 'yu') {
-        zhuyin += pinyinToZhuyinMap['yu'];
-        i += 2;
+      // Check for special cases first (yu, shi, zhi, chi, ri, zi, ci, si)
+      const specialCases = ['yu', 'shi', 'zhi', 'chi', 'ri', 'zi', 'ci', 'si'];
+      const matchedSpecialCase = specialCases.find(sc => pinyinSyllable.substr(i).toLowerCase().startsWith(sc));
+      if (matchedSpecialCase) {
+        zhuyin += pinyinToZhuyinMap[matchedSpecialCase];
+        i += matchedSpecialCase.length;
         continue;
       }
       

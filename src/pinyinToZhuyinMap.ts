@@ -7,5 +7,12 @@ export const pinyinToZhuyinMap: { [key: string]: string } = {
   'g': 'ㄍ', 'k': 'ㄎ', 'h': 'ㄏ', 'j': 'ㄐ', 'q': 'ㄑ', 'x': 'ㄒ',
   'zh': 'ㄓ', 'ch': 'ㄔ', 'sh': 'ㄕ', 'r': 'ㄖ', 'z': 'ㄗ', 'c': 'ㄘ', 's': 'ㄙ',
   'y': 'ㄧ', 'w': 'ㄨ',
-  'yu': 'ㄩ'  // Add this line to handle 'yu' correctly
+  'yu': 'ㄩ',
+  'shi': 'ㄕ',  // Add this line to handle 'shi' correctly
+  'zhi': 'ㄓ',  // Add this line to handle 'zhi' correctly
+  'chi': 'ㄔ',  // Add this line to handle 'chi' correctly
+  'ri': 'ㄖ',   // Add this line to handle 'ri' correctly
+  'zi': 'ㄗ',   // Add this line to handle 'zi' correctly
+  'ci': 'ㄘ',   // Add this line to handle 'ci' correctly
+  'si': 'ㄙ'    // Add this line to handle 'si' correctly
 };
