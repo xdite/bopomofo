@@ -15,5 +15,6 @@ export const pinyinToZhuyinMap: { [key: string]: string } = {
   'ri': 'ㄖ',   // Add this line to handle 'ri' correctly
   'zi': 'ㄗ',   // Add this line to handle 'zi' correctly
   'ci': 'ㄘ',   // Add this line to handle 'ci' correctly
-  'si': 'ㄙ'    // Add this line to handle 'si' correctly
+  'si': 'ㄙ',    // Add this line to handle 'si' correctly
+  'ying': 'ㄧㄥ' // Add this line to handle 'ying' correctly
 };
