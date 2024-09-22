@@ -22,7 +22,14 @@ export function pinyinToZhuyin(input: string): string[][] {
         continue;
       }
       
-      // Check for three-letter compounds first
+      // Check for 'yu' first
+      if (i < pinyinSyllable.length - 1 && pinyinSyllable.substr(i, 2).toLowerCase() === 'yu') {
+        zhuyin += pinyinToZhuyinMap['yu'];
+        i += 2;
+        continue;
+      }
+      
+      // Check for three-letter compounds
       if (i < pinyinSyllable.length - 2) {
         const threeLetters = pinyinSyllable.substr(i, 3).toLowerCase();
         if (pinyinToZhuyinMap[threeLetters]) {
