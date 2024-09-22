@@ -18,5 +18,9 @@ export const pinyinToZhuyinMap: { [key: string]: string } = {
   'si': 'ㄙ',
   'ying': 'ㄧㄥ',
   'yi': 'ㄧ',
-  'wu': 'ㄨ'  // Add this line to handle 'wu' correctly
+  'wu': 'ㄨ',
+  'xiong': 'ㄒㄩㄥ',  // Add this line to handle 'xiong' correctly
+  'yin': 'ㄧㄣ',  // Make sure this line is present
+  'jing': 'ㄐㄧㄥ',  // Make sure this line is present
+  'jin': 'ㄐㄧㄣ',
 };
