@@ -3,11 +3,11 @@ import { pinyinToZhuyinMap } from './pinyinToZhuyinMap';
 
 function pinyinToZhuyin(text: string): string[][] {
   const pinyinResult = pinyin(text, { style: pinyin.STYLE_TONE2 });
-  console.log('Pinyin result:', pinyinResult);  // 添加這行
+  console.log('Pinyin result:', pinyinResult);
   
   return pinyinResult.map((syllables: string[]) => 
     syllables.map((syllable: string) => {
-      console.log('Processing syllable:', syllable);  // 添加這行
+      console.log('Processing syllable:', syllable);
       let zhuyin = '';
       let tone = '';
       
@@ -17,10 +17,12 @@ function pinyinToZhuyin(text: string): string[][] {
         syllable = syllable.slice(0, -1);
       }
       
-      // Handle 'v' as 'ü' and special case for 'ue'
+      // Handle 'v' as 'ü' and special case for 'yu'
       syllable = syllable.replace(/v/g, 'ü');
-      if (syllable === 'ue') {
-        syllable = 'üe';
+      if (syllable === 'yu') {
+        syllable = 'ü';
+      } else if (['j', 'q', 'x', 'y'].includes(syllable[0]) && syllable.includes('u')) {
+        syllable = syllable.replace('u', 'ü');
       }
       
       // Convert to Zhuyin
