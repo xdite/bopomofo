@@ -8,13 +8,14 @@ export const pinyinToZhuyinMap: { [key: string]: string } = {
   'zh': 'ㄓ', 'ch': 'ㄔ', 'sh': 'ㄕ', 'r': 'ㄖ', 'z': 'ㄗ', 'c': 'ㄘ', 's': 'ㄙ',
   'y': 'ㄧ', 'w': 'ㄨ',
   'yu': 'ㄩ',
-  'yun': 'ㄩㄣ', // Add this line to handle 'yun' correctly
-  'shi': 'ㄕ',  // Add this line to handle 'shi' correctly
-  'zhi': 'ㄓ',  // Add this line to handle 'zhi' correctly
-  'chi': 'ㄔ',  // Add this line to handle 'chi' correctly
-  'ri': 'ㄖ',   // Add this line to handle 'ri' correctly
-  'zi': 'ㄗ',   // Add this line to handle 'zi' correctly
-  'ci': 'ㄘ',   // Add this line to handle 'ci' correctly
-  'si': 'ㄙ',    // Add this line to handle 'si' correctly
-  'ying': 'ㄧㄥ' // Add this line to handle 'ying' correctly
+  'yun': 'ㄩㄣ',
+  'shi': 'ㄕ',
+  'zhi': 'ㄓ',
+  'chi': 'ㄔ',
+  'ri': 'ㄖ',
+  'zi': 'ㄗ',
+  'ci': 'ㄘ',
+  'si': 'ㄙ',
+  'ying': 'ㄧㄥ',
+  'yi': 'ㄧ'
 };
