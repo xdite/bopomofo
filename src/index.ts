@@ -48,20 +48,20 @@ export function pinyinToZhuyin(input: string): string[][] {
         }
       }
       // If no compound found, check for single letter
-      zhuyin += pinyinToZhuyinMap[char] || char;
+      if (pinyinToZhuyinMap[char]) {
+        zhuyin += pinyinToZhuyinMap[char];
+      }
       i++;
     }
     
     // Add tone symbol
-    if (tone) {
-      zhuyin += getToneSymbol(tone);
-    }
+    zhuyin += getToneSymbol(tone);
     
     return [zhuyin];
   });
 }
 
 function getToneSymbol(tone: string): string {
-  const toneSymbols = ['', 'ˊ', 'ˇ', 'ˋ', '˙'];
-  return toneSymbols[parseInt(tone) - 1] || '';
+  const toneSymbols = ['ˉ', 'ˊ', 'ˇ', 'ˋ', '˙'];
+  return toneSymbols[parseInt(tone) - 1] || 'ˉ'; // Default to neutral tone if no tone is specified
 }
